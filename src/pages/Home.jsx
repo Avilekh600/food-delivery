@@ -7,7 +7,7 @@ import { dataContext } from '../Context/UserContext'
 
 function Home() {
 
-  let {cate,setCate} = useContext(dataContext);
+  let {cate,setCate,input} = useContext(dataContext);
 
    function cateFilter(Categories){
       if(Categories==="All"){
@@ -23,7 +23,8 @@ function Home() {
   return (
     <div className='bg-slate-200 w-full min-h-screen'>
      <Navbar/>
-
+     
+     {!input?
      <div className=' mt-5 flex gap-4 flex-wrap justify-center '>
      { Categories.map((item)=>(
           <div className='flex gap-2 mx-1 p-3 rounded-md shadow-xl bg-white w-30 h-30 justify-center items-center flex-col cursor-pointer hover:bg-green-200 transition-all ' onClick={()=>cateFilter(item.name)}>
@@ -31,15 +32,18 @@ function Home() {
               {item.name}
             </div>
      ))}
-
-     </div>
-    
-    <div className='flex flex-wrap justify-center py-8'>
+     </div> : null }
+      
+     <div className='flex flex-wrap justify-center py-8'>
       {cate.map((item)=>(
            <Card name={item.food_name} image={item.food_image} price={item.price} type={item.food_type} />
       ))}
     </div>
+    
 
+
+    
+    
     </div>
   )
 }
