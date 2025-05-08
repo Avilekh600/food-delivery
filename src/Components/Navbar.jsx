@@ -4,11 +4,12 @@ import { IoSearch } from "react-icons/io5";
 import { BsMinecartLoaded } from "react-icons/bs";
 import  { dataContext } from '../Context/UserContext';
 import { food_items } from '../food';
+import { useSelector } from 'react-redux';
 
 
 function Navbar() {
 
-  let {input , setInput,setCate} = useContext(dataContext);
+  let {input , setInput,setCate, showcart, setShowcart} = useContext(dataContext);
 
   useEffect(()=>{
      let newlist =  food_items.filter((item)=>item.food_name.includes(input)||item.food_name.toLowerCase().includes(input) )
@@ -16,6 +17,8 @@ function Navbar() {
      setCate(newlist)
 
   },[input])
+
+  let items = useSelector(state => state.cart)
   
 
   return (
@@ -31,8 +34,8 @@ function Navbar() {
      />
        </form>
 
-       <div className='bg-white h-13 w-13 px-0.5 flex justify-center items-center shadow-xl relative cursor-pointer'>
-        <span className='absolute text-green-600 top-0 right-0.5 '>0</span>
+       <div className='bg-white h-13 w-13 px-0.5 flex justify-center items-center shadow-xl relative cursor-pointer' onClick={()=>setShowcart(!showcart)}>
+        <span className='absolute text-green-600 top-0 right-0.5 '>{items.length}</span>
        <BsMinecartLoaded className='font-bold w-[30px] h-[30px] text-green-600 rounded-md' />
 
        </div>
