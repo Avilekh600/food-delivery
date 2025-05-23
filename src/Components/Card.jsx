@@ -3,6 +3,7 @@ import { GiChickenOven } from "react-icons/gi";
 import { LuVegan } from "react-icons/lu";
 import { useDispatch } from 'react-redux';
 import { AddItem } from '../redux/cartSlice';
+import { toast } from 'react-toastify';
 
 function Card({name,image,id,price,type}) {
 
@@ -23,7 +24,9 @@ function Card({name,image,id,price,type}) {
             </div>
           </div>
           <div>
-                <button className='bg-green-200 w-full mt-3 p-2 rounded-md cursor-pointer hover:bg-green-300 transition-all' onClick={()=>dispatch(AddItem({id:id, name:name, price:price,image:image,qty:1}))}>Add to Dish</button>
+                <button className='bg-green-200 w-full mt-3 p-2 rounded-md cursor-pointer hover:bg-green-300 transition-all' onClick={()=>{dispatch(AddItem({id:id, name:name, price:price,image:image,qty:1}));
+                toast("Item added")
+                }}>Add to Dish</button>
             </div>
     </div>
   )
